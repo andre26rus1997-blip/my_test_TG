@@ -35,57 +35,52 @@ responses = {
     "How_used":"Что бы пользоваться мной просто нажимай кнопки  ",
     "trouble":"У тебя есть проблема давай ее решать",
     "ability":"Ммм могу многое в зависимости от того что ты хочешь",
+    "about_project":"Привет, меня зовут Андрей, я начинающий программист...",
+    "contacts": "Связаться со мной можно по ТГ https://t.me/Andre26ree",
+    "jok": "🤣 Вот шутка!",
+    "weather": "⛅ Сегодня хорошая погода "
 }
+menus = {
+    "main": main_menu,
+    "help": my_help,
+    "info": info 
+    }
+
 
 
 
 @bot.message_handler(commands=["start"])
 def start(message):
+    bot.send_message(message.chat.id, "Главное меню для тебя мой дорогой ❤️", reply_markup=main_menu())
 
-
-    try:
-        bot.delete_message(message.chat.id,message.message_id)
-    except Exception as e:
-        print(f"Ошибка при удалении /start:{e}")
-
-    bot.send_message(message.chat.id,"Главное меню для тебя мой дорогой",reply_markup=main_menu())
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
+    try:
+        bot.delete_message(call.message.chat.id,call.message.message_id)
+    except:
+        pass
 
+
+
+
+    # Если кнопка есть в словаре 
     if call.data in responses:
         bot.send_message(call.message.chat.id,responses[call.data])
 
 
+    # Если кнопка соответствует в меню 
+    elif call.data in menus:
+        bot.send_message(
+            call.message.chat.id,
+            "Выберети кнопку👇",
+            reply_markup=menus[call.data]()
+        )
 
-    elif call.data == "help":
 
-        bot.delete_message(call.message.chat.id, call.message.message_id)
-        bot.send_message(call.message.chat.id, "Это раздел помощи пожалуйста не стесняйся ", reply_markup=my_help())
-    elif call.data =="info":
 
-        bot.send_message(call.message.chat.id,"📌 Это раздел информации. Выбери, что тебе интересно:",reply_markup=info())
-        bot.delete_message(call.message.chat.id,call.message.message_id)
-    elif call.data =="about_project":
-        bot.send_message(call.message.chat.id,"Привет меня зовут Андрей я начинающий "
-                                              "програмист этот пот пой первый пед проэкт , который будет вклюать по мксимуму функций , по которым я "
-                                              "буду учиться програмированию и TeleBot. 🛠 ")
-    elif call.data =="contacts":
-        bot.send_message(call.message.chat.id,"Связаться со мной можно по ТГ https://t.me/Andre26ree")
 
-    elif call.data =="info":
-        bot.send_message(call.message.chat.id,"Это команда info")
-    elif call.data =="jok":
-        bot.send_message(call.message.chat.id,"This is jok")
-    elif call.data =="weather":
-        bot.send_message(call.message.chat.id,"эта погода ")
-
-    elif call.data == "back_main":
-        bot.delete_message(call.message.chat.id, call.message.message_id)
-        bot.send_message(call.message.chat.id,"🥳Главное меню снова тут 🥳",reply_markup=main_menu())
-
-    elif call.data =="back":
-        bot.delete_message(call.message.chat.id, call.message.message_id)
+    elif call.data =="back" or call.data == "back_main":
         bot.send_message(call.message.chat.id,"🔙 Возврат в главное меню",reply_markup=main_menu())
 
 
