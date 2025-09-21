@@ -4,7 +4,7 @@ import requests
 
 bot = telebot.TeleBot("8300321950:AAGARJW5aN-9R4q0zA9B5JeLlbeL-pT0cd8")
 API = "9d25c51fa1e0dfe91110828f36f71afb"
-
+bot.remove_webhook()
 
 # Главное меню
 def main_menu():
