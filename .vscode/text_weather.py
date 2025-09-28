@@ -1,10 +1,10 @@
 import telebot
 import requests
 
-bot = telebot.TeleBot("8300321950:AAGARJW5aN-9R4q0zA9B5JeLlbeL-pT0cd8")
+bot = telebot.TeleBot("8443100317:AAFRkXbC7ms2RN9C0RwG2eoJ-z6fRVRxcG4")
 API = "9d25c51fa1e0dfe91110828f36f71afb"
 
-# --- убираем webhook, чтобы работал polling ---
+
 
 
 
