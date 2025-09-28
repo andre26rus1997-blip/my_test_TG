@@ -1,9 +1,9 @@
 
 
 text = 1000
-gfdgd
+gfdgdfd
 
-
-print(text)
-
-print(text)fdggf
+ffff
+print(texft)fdsfd
+fds
+print(text)fdggffdsfds
